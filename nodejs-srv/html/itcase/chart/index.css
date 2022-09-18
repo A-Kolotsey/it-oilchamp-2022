@@ -1,0 +1,35 @@
+.f-title {
+  font-family: 'Open Sans Condensed', 'Courier New', Courier, monospace;
+  font-weight: 300;
+  font-style: normal;
+
+}
+
+.brand-logo-part{
+  margin-left: 10px;
+}
+
+div.nav-wrapper {
+  min-height: 64px;
+}
+
+div.nav-wrapper>img {
+  max-width: 64px;
+}
+
+.brand-logo-part {
+  line-height: 32px;
+}
+
+.f-report-btn>ul>li {
+  border-right: dashed 1px white;
+}
+
+.chart-points {
+  margin-right: 50px;
+}
+
+#ed_chart_points {
+  max-width: 50px;
+  margin-right: 5px;
+}

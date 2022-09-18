@@ -1,0 +1,16 @@
+{
+  "name": "login",
+  "version": "1.0.0",
+  "description": "login",
+  "main": "login.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "A.Kolotsey",
+  "license": "ISC",
+  "dependencies": {
+    "pg": "^7.14.0",
+    "redis": "^2.8.0",
+    "redis-client": "^0.3.5"
+  }
+}

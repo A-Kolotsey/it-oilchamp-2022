@@ -1,0 +1,48 @@
+@font-face {
+	font-family: 'Open Sans Condensed';
+	font-style: normal;
+	font-weight: 300;
+	src:
+		/* from https://fonts.gstatic.com/s/opensanscondensed/v15/z7NFdQDnbTkabZAIOl9il_O6KJj73e7Ff1GhPuc.woff2 */
+		url('Open_Sans_Condensed_300.woff2') format('woff2'),
+		/* from https://fonts.gstatic.com/s/opensanscondensed/v15/z7NFdQDnbTkabZAIOl9il_O6KJj73e7Ff1GhPuE.woff */
+		url('Open_Sans_Condensed_300.woff') format('woff'),
+		/* from https://fonts.gstatic.com/s/opensanscondensed/v15/z7NFdQDnbTkabZAIOl9il_O6KJj73e7Ff1GhPuM.eot */
+		url('Open_Sans_Condensed_300.eot?#iefix') format('embedded-opentype'),
+		/* from https://fonts.gstatic.com/l/font?kit=z7NFdQDnbTkabZAIOl9il_O6KJj73e7Ff1GhPuA&skey=2f86f64984be1bbf&v=v15#OpenSansCondensed */
+		url('Open_Sans_Condensed_300.svg#OpenSansCondensed') format('svg'),
+		/* from https://fonts.gstatic.com/s/opensanscondensed/v15/z7NFdQDnbTkabZAIOl9il_O6KJj73e7Ff1GhPuI.ttf */
+		url('Open_Sans_Condensed_300.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'Open Sans Condensed';
+	font-style: italic;
+	font-weight: 300;
+	src:
+		/* from https://fonts.gstatic.com/s/opensanscondensed/v15/z7NHdQDnbTkabZAIOl9il_O6KJj73e7Fd_-7suDMRw.woff2 */
+		url('Open_Sans_Condensed_300i.woff2') format('woff2'),
+		/* from https://fonts.gstatic.com/s/opensanscondensed/v15/z7NHdQDnbTkabZAIOl9il_O6KJj73e7Fd_-7suDMQQ.woff */
+		url('Open_Sans_Condensed_300i.woff') format('woff'),
+		/* from https://fonts.gstatic.com/s/opensanscondensed/v15/z7NHdQDnbTkabZAIOl9il_O6KJj73e7Fd_-7suDMQw.eot */
+		url('Open_Sans_Condensed_300i.eot?#iefix') format('embedded-opentype'),
+		/* from https://fonts.gstatic.com/l/font?kit=z7NHdQDnbTkabZAIOl9il_O6KJj73e7Fd_-7suDMQA&skey=fd360ef3f3018d5d&v=v15#OpenSansCondensed */
+		url('Open_Sans_Condensed_300i.svg#OpenSansCondensed') format('svg'),
+		/* from https://fonts.gstatic.com/s/opensanscondensed/v15/z7NHdQDnbTkabZAIOl9il_O6KJj73e7Fd_-7suDMQg.ttf */
+		url('Open_Sans_Condensed_300i.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'Open Sans Condensed';
+	font-style: normal;
+	font-weight: 700;
+	src:
+		/* from https://fonts.gstatic.com/s/opensanscondensed/v15/z7NFdQDnbTkabZAIOl9il_O6KJj73e7Ff0GmPuc.woff2 */
+		url('Open_Sans_Condensed_700.woff2') format('woff2'),
+		/* from https://fonts.gstatic.com/s/opensanscondensed/v15/z7NFdQDnbTkabZAIOl9il_O6KJj73e7Ff0GmPuE.woff */
+		url('Open_Sans_Condensed_700.woff') format('woff'),
+		/* from https://fonts.gstatic.com/s/opensanscondensed/v15/z7NFdQDnbTkabZAIOl9il_O6KJj73e7Ff0GmPuM.eot */
+		url('Open_Sans_Condensed_700.eot?#iefix') format('embedded-opentype'),
+		/* from https://fonts.gstatic.com/l/font?kit=z7NFdQDnbTkabZAIOl9il_O6KJj73e7Ff0GmPuA&skey=695af3be40ce75bf&v=v15#OpenSansCondensed */
+		url('Open_Sans_Condensed_700.svg#OpenSansCondensed') format('svg'),
+		/* from https://fonts.gstatic.com/s/opensanscondensed/v15/z7NFdQDnbTkabZAIOl9il_O6KJj73e7Ff0GmPuI.ttf */
+		url('Open_Sans_Condensed_700.ttf') format('truetype');
+}

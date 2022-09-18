@@ -1,0 +1,7 @@
+.f-logout, .f-login{
+  display: none;
+}
+
+.subj-bar {
+  z-index: 999;
+}

@@ -1,0 +1,37 @@
+.subj-bar{
+    position: fixed;
+    left: 2em;
+    right: 2em;
+    bottom: 2em;
+
+}
+.subj .card-content{
+    padding: 10px;
+}
+.card-btn{
+    margin-top:10px;
+}
+
+.btn-no{
+    margin-left: 10px;
+}
+
+div.btn-close-msg:hover{
+    border-color: white;
+    border-style: solid;
+    border-width: 1px;
+}
+.btn-close-msg{
+    position: absolute;
+    top: 6px;
+    right: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.materialize-notifi-message{
+    position: relative;
+}
+.subj-bar {
+    overflow: auto;
+    max-height: 95vh;
+}

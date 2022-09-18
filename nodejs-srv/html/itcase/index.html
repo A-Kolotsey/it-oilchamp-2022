@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--[if IE]>
+    <meta http-equiv="refresh" content="0; url=./no-ie-support.html">
+  <![endif]-->
+  <title>Буровичок</title>
+  <link rel="icon" type="image/png" href="./pictures/clipart.png" />
+  <link rel="stylesheet" href="../lib/google-font/Open+Sans+Condensed/font.css" media="all" type="text/css">
+  <link rel="stylesheet" href="../lib/materialize-v1.1.0-alpha/css/materialize.min.css">
+  <link rel="stylesheet" href="../lib/materialize-icons-full/icon.css">
+  <link rel="stylesheet" href="../lib/materialize-notifi/materialize-notifi.css">
+  <link rel="stylesheet" href="../lib/chosen_v1.8.7/chosen.min.css">
+  <link rel="stylesheet" href="./materialize-reconf.css?ver=202209161031">
+  <link rel="stylesheet" href="./index.css?ver=202209161031">
+
+</head>
+
+<body>
+
+  <header>
+    <nav>
+      <div class="nav-wrapper blue lighten-1">
+        <img src="./pictures/clipart.png" alt="logo">
+        <div class="f-title brand-logo hide-on-med-and-down">
+          <div class="brand-logo-part">
+            Коммуникационный центр
+          </div>
+          <div class="brand-logo-part">
+            <h6>"Буровичок"</h6>
+          </div>
+        </div>
+        <div class="f-title brand-logo hide-on-extra-large-only hide-on-large-only right">
+          <div class="brand-logo-part">
+            Комуникационный центр
+          </div>
+          <div class="brand-logo-part">
+            <h6>"Буровичок"</h6>
+          </div>
+        </div>
+        <a href="#" data-target="mobile-sidebar" class="sidenav-trigger">
+          <i class="material-icons white-text">menu</i>
+        </a>
+        <ul id="nav-mobile" class="right show-on-large-only hide-on-med-and-down show-on-extra-large">
+          <li class="nav-tab"><a href="./#opensection&s=s-flot&f=none">[ Контроль оборудования ]</a></li>
+          <li class="nav-tab"><a href="./#opensection&s=s-docs&f=none">[ Обработка заданий ]</a></li>
+          <li class="nav-tab"><a href="./#opensection&s=s-messages&f=none">[ Сообщения ]</a></li>
+          <li class="nav-tab"><a href="./#opensection&s=s-report&f=none">[ Отчеты ]</a></li>
+          <li class="nav-tab"><a href="./#opensection&s=s-login">[ Вход ]</a></li>
+        </ul>
+      </div>
+    </nav>
+    <ul id="mobile-sidebar" class="sidenav">
+      <li class="nav-tab"><a href="./#opensection&s=s-flot&f=none">[ Контроль оборудования ]</a></li>
+      <li class="nav-tab"><a href="./#opensection&s=s-docs&f=none">[ Обработка заданий ]</a></li>
+      <li class="nav-tab"><a href="./#opensection&s=s-messages&f=none">[ Сообщения ]</a></li>
+      <li class="nav-tab"><a href="./#opensection&s=s-report&f=none">[ Отчеты ]</a></li>
+      <li class="nav-tab"><a href="./#opensection&s=s-login">[ Вход ]</a></li>
+    </ul>
+  </header>
+
+  <!-- Begin page content -->
+  <main>
+
+    <!-- Begin section // Контроль оборудования -->
+    <div class="section s-flot container ">
+      <div class="f-flot-btn  blue lighten-1">
+        <ul class="tabs tabs-transparent">
+          <li class="tab"><a href="./#opensection&s=s-flot&f=f-flot-seach-by-flot">Поиск по флотам</a></li>
+          <li class="tab"><a href="./#opensection&s=s-flot&f=f-flot-seach-by-equipment">Поиск по оборудованию</a></li>
+          <li class="tab bt-create-sensor-chart hide"><a>Построить график [<b>0</b>]</a></li>
+        </ul>
+      </div>
+      <div class="form f-flot-seach-by-flot">
+        <div class="row">
+          <div class="col s12 m10 l10">
+            <div class="col s12 m1 l1">
+            </div>
+            <div class="col s12 m10 l10">
+              <label for="ed_flot_input_flot_name" class="active">Наименование флота</label>
+              <input type="text" id="ed_flot_input_name" list="list_flot_input_flot_name" readonly="readonly"
+                value="Флот №...|">
+              <datalist class="input-flot" id="list_flot_input_flot_name"></datalist>
+            </div>
+          </div>
+          <div class="col s6 m1 l1">
+            <div class="btn btn-large btn-flot-serch-category" id="bt_flot_input_send"><i
+                class="small material-icons">search</i></div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="form f-flot-seach-by-equipment">
+        <div class="row">
+          <div class="col s12 m10 l10">
+            <div class="col s12 m8 l5">
+              <label for="ed_flot_equipment_type_rq" class="active">Тип оборудования</label>
+              <input type="text" id="ed_flot_etaps_rq" readonly="readonly" value="Насосное оборуд...">
+            </div>
+            <div class="col s12 m8 l5">
+              <label for="cb_flot_equipment_status">Состояние оборудования</label>
+              <input type="text" id="cb_flot_equipment_status" readonly="readonly" value="В ремонте...">
+            </div>
+            <div class="col s12 m6 l2">
+              <label for="cb_flot_date_to">Дата последнего ТО</label>
+              <input type="text" id="cb_flot_date_to" readonly="readonly" value="27.08.2021">
+            </div>
+          </div>
+          <div class="col s12 m2 l2">
+            <div class="btn btn-large btn-flot-serch-category" id="bt_flot_rq_send"><i
+                class="small material-icons">search</i></div>
+            <!-- <div class="btn btn-large" id="bt_flot_etaps_clean"><i class="small material-icons">loop</i></div> -->
+          </div>
+        </div>
+
+      </div>
+      <div class="">
+        <div class="row">
+
+          <!-- flots -->
+          <div class="col s6 m6 l6 flot-list-container">
+          </div>
+
+          <!-- equipment -->
+          <div class="card-list col s6 m6 l6 equipment-list-container">
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End section -->
+
+    <!-- Begin section // Обработка заданий-->
+    <div class="section s-docs container ">
+      <div class="f-docs-btn  blue lighten-1">
+        <ul class="tabs tabs-transparent">
+          <li class="tab"><a href="./#opensection&s=s-docs&f=f-docs-tender">Задания</a></li>
+          <li data-ui_element="f-docs-offer" class="tab"><a
+              href="./#opensection&s=s-docs&f=f-docs-offer">Предложения</a></li>
+          <li data-ui_element="f-docs-myoffer" class="tab"><a href="./#opensection&s=s-docs&f=f-docs-myoffer">Мои
+              предложения</a></li>
+          <li data-ui_element="f-docs-deal" class="tab"><a href="./#opensection&s=s-docs&f=f-docs-deal">Договоры</a>
+          <li data-ui_element="f-docs-mydeal" class="tab"><a href="./#opensection&s=s-docs&f=f-docs-mydeal">Мои
+              договоры</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="form f-docs-tender">
+        <!-- Задания -->
+        <div class="row tender-list-container">
+        </div>
+      </div>
+
+      <div class="form f-docs-offer">
+        <!-- Предложения -->
+        <div class="row offer-list-container">
+
+          
+
+        </div>
+      </div>
+
+      <div class="form f-docs-myoffer">
+        <!-- Мои предложения -->
+        <div class="row myoffer-list-container">
+
+        </div>
+      </div>
+
+      <div class="form f-docs-deal">
+        <!-- Договоры -->
+        <div class="row deal-list-container">
+          <div class="col s12 m12 l12">
+            
+          </div>
+        </div>
+      </div>
+
+      <div class="form f-docs-mydeal">
+        <!-- Мои договоры -->
+        <div class="row mydeal-list-container">
+
+        </div>
+      </div>
+    </div>
+    <!-- End section -->
+
+    <!-- Begin section // Сообщения-->
+    <div class="section s-messages container ">
+      <div class="f-messages-btn  blue lighten-1">
+        <ul class="tabs tabs-transparent">
+          <li class="tab"><a href="./#opensection&s=s-messages&f=f-messages-chat">Общий чат</a></li>
+          <li class="tab"><a href="./#opensection&s=s-messages&f=f-messages-in">Входящие</a></li>
+          <li class="tab"><a href="./#opensection&s=s-messages&f=f-messages-out">Исходящие</a></li>
+        </ul>
+      </div>
+
+      <div class="form f-messages-chat">
+        <!--Общий чат-->
+        <div class="row">
+          <div class="">
+            <div class="flex-inline-block">
+              <label for="ed_newchatcoment" class="">Новый коментарий</label>
+              <input type="text" name="ed_newchatcoment" id="ed_newchatcoment">
+              <select class="browser-default" id="cb_messages_chat_all">
+                <option value="1" selected="selected">Переписка</option>
+                <option value="2">Срочное сообщение</option>
+                <option value="3">Информирование</option>
+              </select>
+              <input type="submit" class="btn" id="btn_newcoment" value="Добавить">
+            </div>
+
+            <ul class="collection coment-list">
+              <li class="collection-item " event="chat">
+                <label for="msg0">Пользователь / 2022-09-07 11:14:36 / <div class="event-msg">ПЕРЕПИСКА</div></label>
+                <div class="btn white-text btn-small btn-msg-chat">Личное сообщение</div>
+                <div id="msg0" class="">Текст сообщения...</div>
+              </li>
+              <li class="collection-item orange lighten-5" event="set-new-record">
+                <label for="msg1">Пользователь / 2022-09-07 11:14:36 / <div class="event-msg orange-text">СРОЧНОЕ
+                    СООБЩЕНИЕ</div>
+                </label>
+                <div class="btn white-text btn-small btn-msg-chat">Личное сообщение</div>
+                <div id="msg1" class="">Текст сообщения...</div>
+              </li>
+              <li class="collection-item blue lighten-5" event="chat">
+                <label for="msg0">Пользователь / 2022-09-07 11:14:36 / <div class="event-msg blue-text">ИНФОРМИРОВАНИЕ
+                  </div>
+                </label>
+                <div class="btn white-text btn-small btn-msg-chat">Личное сообщение</div>
+                <div id="msg0" class="">Текст сообщения...</div>
+              </li>
+              <li class="collection-item" event="set-new-record">
+                <label for="msg1">Пользователь / 2022-09-07 11:14:36 / <div class="event-msg">ПЕРЕПИСКА</div></label>
+                <div class="btn white-text btn-small btn-msg-chat">Личное сообщение</div>
+                <div id="msg1" class="">Текст сообщения...</div>
+              </li>
+              </li>
+              <li class="collection-item" event="set-new-record">
+                <label for="msg1">Пользователь / 2022-09-07 11:14:36 / <div class="event-msg">ПЕРЕПИСКА</div></label>
+                <div class="btn white-text btn-small btn-msg-chat">Личное сообщение</div>
+                <div id="msg1" class="">Текст сообщения...</div>
+              </li>
+              </li>
+              <li class="collection-item blue lighten-5" event="chat">
+                <label for="msg0">Пользователь / 2022-09-07 11:14:36 / <div class="event-msg blue-text">ИНФОРМИРОВАНИЕ
+                  </div>
+                </label>
+                <div class="btn white-text btn-small btn-msg-chat">Личное сообщение</div>
+                <div id="msg0" class="">Текст сообщения...</div>
+              </li>
+              </li>
+              <li class="collection-item" event="set-new-record">
+                <label for="msg1">Пользователь / 2022-09-07 11:14:36 / <div class="event-msg">ПЕРЕПИСКА</div></label>
+                <div class="btn white-text btn-small btn-msg-chat">Личное сообщение</div>
+                <div id="msg1" class="">Текст сообщения...</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="form f-messages-in">
+        <!--Входящие-->
+        <div class="row">
+          <div class="">
+            <ul class="collection coment-list">
+              <li class="collection-item " event="chat">
+                <label for="msg0">Пользователь / 2022-09-07 11:14:36 / <div class="event-msg">ПЕРЕПИСКА</div></label>
+                <div class="btn btn-small red btn-msg-chat-del" id=""><i class="small material-icons">delete</i></div>
+                <div class="btn white-text btn-small btn-msg-chat">Ответить</div>
+                <div id="msg0" class="">Текст сообщения...</div>
+              </li>
+              <li class="collection-item orange lighten-5" event="set-new-record">
+                <label for="msg1">Пользователь / 2022-09-07 11:14:36 / <div class="event-msg orange-text">СРОЧНОЕ
+                    СООБЩЕНИЕ</div>
+                </label>
+                <div class="btn btn-small red btn-msg-chat-del" id=""><i class="small material-icons">delete</i></div>
+                <div class="btn white-text btn-small btn-msg-chat">Ответить</div>
+                <div id="msg1" class="">Текст сообщения...</div>
+              </li>
+              <li class="collection-item blue lighten-5" event="chat">
+                <label for="msg0">Пользователь / 2022-09-07 11:14:36 / <div class="event-msg blue-text">ИНФОРМИРОВАНИЕ
+                  </div>
+                </label>
+                <div class="btn btn-small red btn-msg-chat-del" id=""><i class="small material-icons">delete</i></div>
+                <div class="btn white-text btn-small btn-msg-chat">Ответить</div>
+                <div id="msg0" class="">Текст сообщения...</div>
+              </li>
+              <li class="collection-item" event="set-new-record">
+                <label for="msg1">Пользователь / 2022-09-07 11:14:36 / <div class="event-msg">ПЕРЕПИСКА</div></label>
+                <div class="btn btn-small red btn-msg-chat-del" id=""><i class="small material-icons">delete</i></div>
+                <div class="btn white-text btn-small btn-msg-chat">Ответить</div>
+                <div id="msg1" class="">Текст сообщения...</div>
+              </li>
+              </li>
+              <li class="collection-item" event="set-new-record">
+                <label for="msg1">Пользователь / 2022-09-07 11:14:36 / <div class="event-msg">ПЕРЕПИСКА</div></label>
+                <div class="btn btn-small red btn-msg-chat-del" id=""><i class="small material-icons">delete</i></div>
+                <div class="btn white-text btn-small btn-msg-chat">Ответить</div>
+                <div id="msg1" class="">Текст сообщения...</div>
+              </li>
+              </li>
+              <li class="collection-item blue lighten-5" event="chat">
+                <label for="msg0">Пользователь / 2022-09-07 11:14:36 / <div class="event-msg blue-text">ИНФОРМИРОВАНИЕ
+                  </div>
+                </label>
+                <div class="btn btn-small red btn-msg-chat-del" id=""><i class="small material-icons">delete</i></div>
+                <div class="btn white-text btn-small btn-msg-chat">Ответить</div>
+                <div id="msg0" class="">Текст сообщения...</div>
+              </li>
+              </li>
+              <li class="collection-item" event="set-new-record">
+                <label for="msg1">Пользователь / 2022-09-07 11:14:36 / <div class="event-msg">ПЕРЕПИСКА</div></label>
+                <div class="btn btn-small red btn-msg-chat-del" id=""><i class="small material-icons">delete</i></div>
+                <div class="btn white-text btn-small btn-msg-chat">Ответить</div>
+                <div id="msg1" class="">Текст сообщения...</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="form f-messages-out">
+        <!--Исходящие-->
+        <div class="row">
+          <div class="">
+            <div class="flex-inline-block">
+              <label for="ed_newchatcoment" class="">Сообщение</label>
+              <input type="text" name="ed_newchatcoment" id="ed_newchatcoment">
+              <label for="ed_newchatcoment" class="">Кому отправить</label>
+              <select class="browser-default" id="cb_messages_chat_all">
+                <option value="1" selected="selected">Переписка</option>
+                <option value="2">Срочное сообщение</option>
+                <option value="3">Информирование</option>
+              </select>
+              <select class="browser-default" id="cb_messages_chat_all">
+                <option value="1" selected="selected">Переписка</option>
+                <option value="2">Срочное сообщение</option>
+                <option value="3">Информирование</option>
+              </select>
+              <input type="submit" class="btn" id="btn_newcoment" value="Выбрать">
+            </div>
+            <ul class="collection coment-list">
+              <li class="collection-item " event="chat">
+                <label for="msg0">Пользователь / 2022-09-07 11:14:36 / <div class="event-msg">ПЕРЕПИСКА</div></label>
+                <div class="btn btn-small red btn-msg-chat-del" id=""><i class="small material-icons">delete</i></div>
+                <div class="btn white-text btn-small btn-msg-chat">Переслать</div>
+                <div id="msg0" class="">Текст сообщения...</div>
+              </li>
+              <li class="collection-item orange lighten-5" event="set-new-record">
+                <label for="msg1">Пользователь / 2022-09-07 11:14:36 / <div class="event-msg orange-text">СРОЧНОЕ
+                    СООБЩЕНИЕ</div>
+                </label>
+                <div class="btn btn-small red btn-msg-chat-del" id=""><i class="small material-icons">delete</i></div>
+                <div class="btn white-text btn-small btn-msg-chat">Переслать</div>
+                <div id="msg1" class="">Текст сообщения...</div>
+              </li>
+              <li class="collection-item blue lighten-5" event="chat">
+                <label for="msg0">Пользователь / 2022-09-07 11:14:36 / <div class="event-msg blue-text">ИНФОРМИРОВАНИЕ
+                  </div>
+                </label>
+                <div class="btn btn-small red btn-msg-chat-del" id=""><i class="small material-icons">delete</i></div>
+                <div class="btn white-text btn-small btn-msg-chat">Переслать</div>
+                <div id="msg0" class="">Текст сообщения...</div>
+              </li>
+              <li class="collection-item" event="set-new-record">
+                <label for="msg1">Пользователь / 2022-09-07 11:14:36 / <div class="event-msg">ПЕРЕПИСКА</div></label>
+                <div class="btn btn-small red btn-msg-chat-del" id=""><i class="small material-icons">delete</i></div>
+                <div class="btn white-text btn-small btn-msg-chat">Переслать</div>
+                <div id="msg1" class="">Текст сообщения...</div>
+              </li>
+              </li>
+              <li class="collection-item" event="set-new-record">
+                <label for="msg1">Пользователь / 2022-09-07 11:14:36 / <div class="event-msg">ПЕРЕПИСКА</div></label>
+                <div class="btn btn-small red btn-msg-chat-del" id=""><i class="small material-icons">delete</i></div>
+                <div class="btn white-text btn-small btn-msg-chat">Переслать</div>
+                <div id="msg1" class="">Текст сообщения...</div>
+              </li>
+              </li>
+              <li class="collection-item blue lighten-5" event="chat">
+                <label for="msg0">Пользователь / 2022-09-07 11:14:36 / <div class="event-msg blue-text">ИНФОРМИРОВАНИЕ
+                  </div>
+                </label>
+                <div class="btn btn-small red btn-msg-chat-del" id=""><i class="small material-icons">delete</i></div>
+                <div class="btn white-text btn-small btn-msg-chat">Переслать</div>
+                <div id="msg0" class="">Текст сообщения...</div>
+              </li>
+              </li>
+              <li class="collection-item" event="set-new-record">
+                <label for="msg1">Пользователь / 2022-09-07 11:14:36 / <div class="event-msg">ПЕРЕПИСКА</div></label>
+                <div class="btn btn-small red btn-msg-chat-del" id=""><i class="small material-icons">delete</i></div>
+                <div class="btn white-text btn-small btn-msg-chat">Переслать</div>
+                <div id="msg1" class="">Текст сообщения...</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End section -->
+
+    <!-- Begin section // Отчеты -->
+    <div class="section s-report container ">
+      <div class="f-report-btn blue lighten-1">
+        <ul class="tabs tabs-transparent">
+          <li class="tab" title="">
+            <a href="./#opensection&s=s-report&f=f-report-graph">Графики</a>
+          </li>
+          <li class="tab"><a href="./#opensection&s=s-report&f=f-report-byday">Отчет по заданиям</a></li>
+        </ul>
+      </div>
+
+      <div class="form f-report-graph">
+        <div class="row">
+          <div class="col s12 m5 l5">
+            <label for="cb_report_graph_skv">Наименование датчика</label>
+            <select class="browser-default" id="cb_report_graph_skv">
+              <option value="0" disabled="disabled" selected="selected">-- ВЫБРАТЬ --</option>
+            </select>
+          </div>
+          <div class="col s12 m5 l5">
+            <label for="cb_report_graph_type">Наименование оборудования</label>
+            <select class="browser-default" id="cb_report_graph_type">
+              <option value="0" disabled="disabled" selected="selected">-- ВЫБРАТЬ --</option>
+            </select>
+          </div>
+          <label>&nbsp</label>
+          <div class="col s12 m2 l2">
+            <div class="btn" id="bt_report_graph_paint">Отобразить</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12 m12 l12 f-report-graph-result">
+            <div class="row report-graph-container">
+              <p>
+                <label>Список графиков</label>
+              </p>
+              <table class="report-graph-result-table">
+                <thead>
+                  <tr>
+                    <th>Дата:</th>
+                    <th>Оборудование:</th>
+                    <th>Прибор:</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="out_report_graph_body">
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form f-report-byday">
+        <div class="row">
+        </div>
+        <div class="row" id="out_report_byday">
+        </div>
+      </div>
+    </div>
+    <!-- End section -->
+
+    <!-- Begin section -->
+    <div class="section s-login">
+      <div class="f-login">
+      </div>
+      <div class="f-logout">
+      </div>
+      <div class="container center-align">
+        <div class="row">
+          <div class="col s12 l4 offset-l4 m6 offset-m3 card grey lighten-3">
+            <div class="card-content">
+              <div class='row'>
+                <div class='col s12'>
+                  <div class="login-form ">
+                    <h4 id="login_info_out"></h4>
+                    <button class=" btn btn-small" id="bt_loginopen">вход/выход</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End section -->
+
+  </main>
+
+
+
+
+
+  <footer class="page-footer blue lighten-1">
+    <div class="footer-copyright">
+      <div class="container">BelOil.TU <abbr id="cur_dty"></abbr> IT-CASE</div>
+      <script>
+        document.querySelector('#cur_dty').innerHTML = `- ${(new Date).getFullYear()}`;
+      </script>
+    </div>
+
+  </footer>
+  <script src="../lib/jquery-3.6.0.min.js"></script>
+  <script src="../lib/materialize-v1.1.0-alpha/js/materialize.min.js"></script>
+  <script src="../lib/materialize-notifi/materialize-notifi.js"></script>
+  <script src="../lib/chosen_v1.8.7/chosen.jquery.min.js"></script>
+  <script src="./materialize-initialization.js"></script>
+  <script src="../lib/chart.js-2.7.3/Chart.min.js"></script>
+
+  <script src="./index-ui.js?ver=202209161031"></script>
+  <script src="./index.js?ver=202209161031"></script>
+  <script src="./login-form.js?ver=202209161031"></script>
+  <script src="./actions.js?ver=202209161031"></script>
+  <script src="./singlepage.js"></script>
+</body>
+
+</html>

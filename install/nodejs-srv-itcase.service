@@ -1,0 +1,16 @@
+[Unit]
+Description=BelOli.TU Node.JS BackEnd
+After=network.target
+
+[Service]
+Type=simple
+User=root
+Environment=NODE_PORT=8080
+WorkingDirectory=/opt/itcase/nodejs-srv/
+ExecStart=/usr/bin/node /opt/itcase/nodejs-srv/srv.js
+Restart=on-failure
+RestartSec=20
+
+
+[Install]
+WantedBy=multi-user.target

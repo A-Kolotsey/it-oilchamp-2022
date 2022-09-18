@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible'>
+  <title>ПО Белоруснефть - Аутентификация</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <link rel="stylesheet" href="../../lib/materialize-v1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="../../lib/materialize-icons-full/icon.css" >
+  <link rel="stylesheet" href="../../lib/materialize-notifi/materialize-notifi.css" >
+  <link rel='stylesheet' type='text/css' media='screen' href='./main.css'>
+
+
+</head>
+<body>
+
+  <!-- <div class="out">
+    
+  </div> -->
+
+  <div class="s-login">
+    <div class="f-login">
+      <div class="container center-align">
+        <div class="row" >
+          <div class="col s12 l6 offset-l3 m8 offset-m2 xl4 offset-xl4 card grey lighten-3">
+            <div class="card-content">
+              <div class='row'>
+                <div class='col s12'>
+                  <h4 class="indigo-text text-accent-2">Авторизуйтесь</h4>
+                </div>
+              </div>
+              <div class='row'>
+                <div class='input-field col s12'>
+                  <input list="list_unames" class='validate' type='text' name='ed_uname' id='ed_uname'/>
+                  <label for='ed_uname'>Имя пользователя</label>
+                  <datalist id="list_unames">
+                    <!-- 
+                    <option value="A.Kolotsey"></option>
+                    -->
+                  </datalist>
+                </div>
+              </div>
+              <div class='row'>
+                <div class='input-field col s12'>
+                  <input class='validate' type='password' name='ed_passw' id='ed_passw' />
+                  <label for='ed_passw'>Пароль</label>
+                </div>
+                <a class='indigo-text text-lighten-4' href='#!'><h6>Забыли пароль?</h6></a>
+              </div>
+            </div>
+            <div class="card-action">
+              <div class='row center-align'>
+                <button  id="bt_sendlogin" class='col s12 btn btn-large waves-effect indigo'>Вход</button>
+              </div>
+              <div class='row center-align'>
+                <button id="bt_sendlogin_guest" class='col s12 btn btn-large waves-effect indigo'>Как войти...</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="f-logout">
+      <div class="container center-align">
+        <div class="row" >
+          <div class="col s12 l4 offset-l4 m6 offset-m3 card grey lighten-3">
+            <div class="card-content">
+              <div class='row'>
+                <div class='col s12'>
+                  <h4 class="indigo-text text-accent-2">Авторизованы</h4>
+                </div>
+              </div>
+              <div class='row'>
+                <div class='col s12'>
+                  <h4 class="green-text text-accent-2 lb-uname">uname</h4>
+                </div>
+              </div>
+            </div>
+            <div class="card-action">
+              <div class='row center-align'>
+                <button id="bt_sendlogout" class='col s12 btn btn-large waves-effect indigo'>Выход</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <script src="../../lib/jquery-3.4.1.min.js" text="js"></script>
+  <script src="../../lib/materialize-v1.0.0/js/materialize.js"></script>
+  <script src="../../lib/materialize-notifi/materialize-notifi.js"></script>
+  <script src='./main.js'></script>
+</body>
+</html>

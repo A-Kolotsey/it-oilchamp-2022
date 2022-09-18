@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--[if IE]>
+    <meta http-equiv="refresh" content="0; url=./no-ie-support.html">
+  <![endif]-->
+  <title>Буровичок - Графики</title>
+  <link rel="icon" type="image/png" href="../pictures/clipart.png" />
+  <link rel="stylesheet" href="../../lib/google-font/Open+Sans+Condensed/font.css" media="all" type="text/css">
+  <link rel="stylesheet" href="../../lib/materialize-v1.1.0-alpha/css/materialize.min.css">
+  <link rel="stylesheet" href="../../lib/materialize-icons-full/icon.css">
+  <link rel="stylesheet" href="../../lib/materialize-notifi/materialize-notifi.css">
+  <link rel="stylesheet" href="../../lib/chosen_v1.8.7/chosen.min.css">
+  <link rel="stylesheet" href="./materialize-reconf.css?ver=202209161031">
+  <link rel="stylesheet" href="./index.css?ver=202209161031">
+
+</head>
+
+<body>
+  <script>
+    var ua = window.navigator.userAgent;
+    var msie = ua.indexOf("MSIE ");
+    if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) {
+      //ie detected
+      window.location = "../no-ie-support.html";
+    } else {
+      //no ie detected
+    }
+  </script>
+
+
+  <header>
+    <nav>
+      <div class="nav-wrapper blue lighten-1">
+        <img src="../pictures/clipart.png" alt="logo">
+        <div class="f-title brand-logo hide-on-med-and-down">
+          <div class="brand-logo-part">
+            Коммуникационный центр
+          </div>
+          <div class="brand-logo-part">
+            <h6>"Буровичок"</h6>
+          </div>
+        </div>
+        <ul id="nav-mobile" class="right">
+          <li class="chart-points col s2 m2 l2"><input type="number" name="" id="ed_chart_points" value="50" class="white-text">точек на графике</li>
+          <li class="nav-tab"><a class="btn-close">[ Закрыть график ]</a></li>
+        </ul>
+      </div>
+    </nav>
+<!-- 
+    <ul id="mobile-sidebar" class="sidenav">
+      <li class="chart-points col s2 m2 l2"><input type="number" name="" id="ed_chart_points" value="50" class="white-text">точек на графике</li>
+      <li class="nav-tab"><a class="btn-close">[ Закрыть график ]</a></li>
+    </ul> -->
+
+  </header>
+
+  <!-- Begin page content -->
+  <main>
+
+    <!-- Begin section -->
+    <div class="section s-report container ">
+      <div class="f-report-btn  blue lighten-1">
+        <ul class="tabs tabs-transparent chart-list-container">
+
+        </ul>
+      </div>
+
+      <div class="form f-report-graph">
+        <div class="row ">
+          <div class="f-report-graph-info">
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12 m12 l12 f-report-graph-result" id="f_report_graph_result">
+            <canvas id="chart_report_graph_out"></canvas>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+    <!-- End section -->
+
+
+
+  </main>
+
+
+
+  <footer class="page-footer  blue lighten-1">
+    <div class="footer-copyright">
+      <div class="container">BelOil.TU <abbr id="cur_dty"></abbr>  IT-CASE</div>
+      <script>
+        document.querySelector('#cur_dty').innerHTML = `- ${(new Date).getFullYear()}`;
+      </script>
+    </div>
+
+  </footer>
+  <script src="../../lib/jquery-3.6.0.min.js"></script>
+  <script src="../../lib/materialize-v1.1.0-alpha/js/materialize.min.js"></script>
+  <script src="../../lib/materialize-notifi/materialize-notifi.js"></script>
+  <script src="../../lib/chart.js-2.7.3/Chart.min.js"></script>
+
+  <script src="./chart.js?ver=202209161031"></script>
+</body>
+
+</html>

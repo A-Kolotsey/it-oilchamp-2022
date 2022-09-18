@@ -1,0 +1,14 @@
+{
+  "name": "itcase-pg-query-corporate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "itcase-pg-query-corporate.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "a.kolotsey",
+  "license": "ISC",
+  "dependencies": {
+    "pg": "^8.7.1"
+  }
+}
