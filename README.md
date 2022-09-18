@@ -10,11 +10,13 @@ JavaScript-окружение: Node.js. При разработке исполь
 ____
 ### Подготовка к запуску
 1. Сделать клон репозитория (предпологается /opt/itcase).  
-2. Развернуть дамп данных в PostgreSQL. Находится `/opt/itcase/install/itcase.7z`
+2. Установить REDIS `sudo yum install redis`
+2. Установить Node.js `sudo yum install nodejs`
+3. Развернуть дамп данных в PostgreSQL (предпологается что PostgreSQL уже установлена). Находится `/opt/itcase/install/itcase.7z`
     * В СУБД должен быть пользователь (предпологается user_itcase с паролем itcase) 
     * Создана база данных (предпологается itcase) на которую у пользователя есть полные права.
-3. Редактируем конфик подключения к PostgreSQL. Находится `/opt/itcase/nodejs-srv/pg_config.json`
-4. Запуск Back-End
+4. Редактируем конфик подключения к PostgreSQL. Находится `/opt/itcase/nodejs-srv/pg_config.json`
+5. Запуск Back-End 
     * Вариант 1: В консоли сервера из папки `/opt/itcase/nodejs-srv/` командой node `./srv.js`
     * Вариант 2: Запуск как сервис. Создать в `/etc/systemd/system/<имя сервиса>.service` или скопировать из `/opt/itcase/install/nodejs-srv-itcase.service`
     * После удачного запуска в консоли выводятся два сообщения `: Сервер стартовал!` и `: REDIS connected`
