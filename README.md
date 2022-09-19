@@ -13,7 +13,7 @@ ____
 2. Установить REDIS `sudo yum install redis`
 2. Установить Node.js `sudo yum install nodejs`
 3. Развернуть дамп данных в PostgreSQL (предпологается что PostgreSQL уже установлена). Находится в архиве `/opt/itcase/install/itcase.7z`
-    * В СУБД должен быть пользователь (предпологается user_itcase с паролем itcase) 
+    * В СУБД должен быть пользователь (предпологается user_itcase с паролем itcase)
     * Создана база данных (предпологается itcase) на которую у пользователя есть полные права.
 4. Редактируем конфик подключения к PostgreSQL. Находится `/opt/itcase/nodejs-srv/pg_config.json`
 5. Запуск Back-End 
