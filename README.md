@@ -15,7 +15,7 @@ ____
 3. Развернуть дамп данных в PostgreSQL (предпологается что PostgreSQL уже установлена). Находится в архиве `/opt/itcase/install/itcase.7z`
     * В СУБД должен быть пользователь (предпологается user_itcase с паролем itcase)
     * Создана база данных (предпологается itcase) на которую у пользователя есть полные права.
-4. Редактируем конфик подключения к PostgreSQL. Находится `/opt/itcase/nodejs-srv/pg_config.json`
+4. Редактируем конфигурацию подключения к PostgreSQL. Находится `/opt/itcase/nodejs-srv/pg_config.json`
 5. Запуск Back-End 
     * Вариант 1: В консоли сервера из папки `/opt/itcase/nodejs-srv/` командой node `./srv.js`
     * Вариант 2: Запуск как сервис. Создать в `/etc/systemd/system/<имя сервиса>.service` или скопировать из `/opt/itcase/install/nodejs-srv-itcase.service`
