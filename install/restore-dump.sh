@@ -3,7 +3,7 @@
 host="192.168.126.25"
 port="54011"
 
-dmp="/data/webserver/itcase/install"
+dmp="/opt/itcase/install"
 tm=$(date "+%Y.%m.%d-%H.%M.%S")
 echo Dump started on $tm
 
