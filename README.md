@@ -24,7 +24,7 @@ ____
 ____
 ## Демонстрация
 Для тестирования развернут интерфейс по адресу 
-![https://dev.beloil.by/tudev/itcase/](https://dev.beloil.by/tudev/itcase/)
+    ![https://dev.beloil.by/tudev/itcase/](https://dev.beloil.by/tudev/itcase/)
 
 Для тестирования созданы пользователи:
 + Со стороны организации заказчика
