@@ -235,11 +235,7 @@ var qjs = function (req, res, qstr) {
     `;
     pg_query(qsql, []).then(function (data) {
       let chart_name = `${main.get_query_sid_from_qstr(qstr)}.json`;
-      //! delete after dev BEGIN
-      fs.writeFile(`${global._srv_dirname +'/html/itcase-dev/chart/'}${chart_name}`, JSON.stringify(data), function (err) {
-        if (err) { console.log(err); }
-      });
-      //! delete after dev END
+
       fs.writeFile(`${chart_path}${chart_name}`, JSON.stringify(data), function (err) {
         if (err) { return _f_response(global._respond_wrapper({ error: err })); }
         return _f_response(global._respond_wrapper({ respond: { chart_name }, querystate: true }));
