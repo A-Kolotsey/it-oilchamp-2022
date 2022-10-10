@@ -69,6 +69,62 @@ var qjs = function (req, res, qstr) {
     });
   }
 
+  if (qstr.cmd === 'get-flot-report-timing') {
+    let unc_doc_flot = to_sql.integer_abs(qstr.unc_doc_flot);
+    if (unc_doc_flot.length === 0) { return _f_response(global._respond_wrapper({ error: 'emptyparam', respond: { target: 'unc_doc_flot' } })); }
+    qsql = `
+    select dift.code_timing,dift.name_timing,doftd.date_val
+    from eqip.t_doc_flot_timing_data doftd
+    left join eqip.t_dir_flot_timing dift on dift.unc = doftd.unc_dir_flot_timing
+    where doftd.unc_doc_flot=${unc_doc_flot}
+    order by doftd.date_val     
+    `;
+    pg_query(qsql, []).then(function (data) {
+      let fact=[],code_timing=data[0].code_timing,name_timing=data[0].name_timing,dt_begin=data[0].date_val;
+      for (let i = 1; i < data.length; i++) {
+        const el = data[i];
+        if (el.code_timing!==code_timing||i === data.length-1) {
+          fact.push({code_timing,name_timing,dt_begin,dt_end:el.date_val});
+          dt_begin=el.date_val;
+          code_timing=el.code_timing;
+          name_timing=el.name_timing;
+        }
+      }
+      qsql = `
+      select dift.code_timing,dift.name_timing,doft.dt_begin,doft.dt_end
+      from eqip.t_doc_flot_timing doft
+      left join eqip.t_dir_flot_timing dift on dift.unc = doft.unc_dir_flot_timing
+      where doft.unc_doc_flot=${unc_doc_flot}
+      order by doft.dt_begin
+      `;
+      pg_query(qsql, []).then(function (data) {
+        let chart_data_array=[],chart_data=[];
+        fact.forEach(el => {
+          if (chart_data_array[el.code_timing]===undefined) {
+            chart_data_array[el.code_timing]={name:el.name_timing,code_timing,data:[]};
+          }
+          chart_data_array[el.code_timing].data.push({x:'Фактический статус',y:[new Date(el.dt_begin).getTime(),new Date(el.dt_end).getTime()]});
+        });
+        data.forEach(el => {
+          if (chart_data_array[el.code_timing]===undefined) {
+            chart_data_array[el.code_timing]={name:el.name_timing,code_timing,data:[]};
+          }
+          chart_data_array[el.code_timing].data.push({x:'Плановый график',y:[new Date(el.dt_begin).getTime(),new Date(el.dt_end).getTime()]});
+        });
+        chart_data_array.forEach(el => {
+          if (el!==null) {
+            chart_data.push(el);
+          }
+        });
+        return _f_response(global._respond_wrapper({ respond: {fact,plan:data,chart_data}, querystate: true }));
+      }).catch((err) => {
+        return _f_response(global._respond_wrapper({ error: err }));
+      });
+    }).catch((err) => {
+      return _f_response(global._respond_wrapper({ error: err }));
+    });
+  }
+
   if (qstr.cmd === 'ins-new-tender') { 
     let unc_doc_equipment = to_sql.integer_abs(qstr.unc_doc_equipment);
     if (unc_doc_equipment.length === 0) { return _f_response(global._respond_wrapper({ error: 'emptyparam', respond: { target: 'unc_doc_equipment' } })); }
@@ -199,9 +255,35 @@ var qjs = function (req, res, qstr) {
     qsql = `
       update eqip.t_doc_deal set ${upd_item.toString()} where unc=${unc_doc_deal}
     `;
-    console.log('qsql :>> ', qsql);
+    // console.log('qsql :>> ', qsql);
     pg_query(qsql, []).then(function (data) {
       return _f_response(global._respond_wrapper({ respond: data, querystate: true }));
+    }).catch((err) => {
+      return _f_response(global._respond_wrapper({ error: err }));
+    });
+  }
+
+  if (qstr.cmd === 'get-report-company-rating-eff') { 
+
+
+
+    qsql = `
+    select dic.name_company , (sum(didr.coef_deal_rating)/count(dic.name_company))coef_deal_rating  
+    from eqip.t_doc_offer doo 
+    left join eqip.t_dir_company dic on dic.unc =doo.unc_dir_company  
+    left join eqip.t_doc_deal dod on dod.unc_doc_offer  =doo.unc  
+    left join eqip.t_dir_deal_rating didr on didr.unc =dod.unc_dir_deal_rating
+    where didr.coef_deal_rating is not null  
+    group by dic.name_company
+    `;
+    // console.log('qsql :>> ', qsql);
+    pg_query(qsql, []).then(function (data) {
+      let chart_data=[],chart_categories=[];
+      data.forEach(el => {
+        chart_data.push(parseFloat(el.coef_deal_rating));
+        chart_categories.push(el.name_company);
+      });
+      return _f_response(global._respond_wrapper({ respond: {chart_data,chart_categories}, querystate: true }));
     }).catch((err) => {
       return _f_response(global._respond_wrapper({ error: err }));
     });

@@ -76,11 +76,12 @@ a.active[href^="./#opensection"] {
 
 
  
-#cb_messages_chat_all{
+#cb_chat_message_status,#cb_out_message_status{
   max-width: 200px;
   height: 2.5rem;
   margin-left: 10px ;
   margin-right: 10px ;
+  border-bottom-style: outset;
 }
 
 .collection-item div.event-msg {
@@ -96,7 +97,8 @@ div.nav-wrapper>img {
 }
 
 div.img-flot>img, div.img-eq>img {
-  max-width: 100%;
+  max-width: 260px;
+  width: 100%;
 }
 
 .img-eq{
@@ -180,3 +182,27 @@ div.rb-item>label>input[type="radio"]+span {
   cursor: pointer;
 }
 
+.navbar-container {
+  min-width: 920px;
+}
+
+#btn_out_message_send_new {
+  margin-left: 10px;
+}
+
+.img-eq>img{
+  border-radius: 5px;
+}
+
+.bl{
+  border-left: dashed 1px
+}
+
+.mlr-20{
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.f-report-btn{
+  cursor: pointer;
+}

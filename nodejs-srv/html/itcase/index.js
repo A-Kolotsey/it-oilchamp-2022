@@ -9,7 +9,10 @@ $(function () {
   // 
   var dir_tender_job = [];
   var dir_flot_timing = [];
+  var doc_flot_list = [];
+  var dir_user_list = [];
   var dir_tender_status = [];
+  var dir_message_status = [];
   var dir_deal_rating = [];
   var list_tender_offer = [];
 
@@ -186,6 +189,11 @@ $(function () {
     }).catch(function (err) {
       console.log('err', err);
     });
+    backend_getJSON(nodejs, { app: app.basic, cmd: 'get-dir-message-status' }).then(function (data) { //* load dir_message_status
+      dir_message_status = data.respond;
+    }).catch(function (err) {
+      console.log('err', err);
+    });
 
   };
 
@@ -336,6 +344,32 @@ $(function () {
     _f_load_and_show_flot_equipment(unc_doc_flot);
   });
 
+
+
+  const _f_load_and_show_flot_report_timing= function(unc_doc_flot,doc_flot_index){
+    backend_getJSON(nodejs, { app: app.corporate, cmd: 'get-flot-report-timing', unc_doc_flot }).then(function (data) { //* create sensor chart
+      //todo: check data >> _check_res(data)
+      data.respond.flot_info=doc_flot_list[doc_flot_index];
+      _f_show_flot_report_timing(data.respond);
+    }).catch(function (err) {
+      console.log('err', err);
+    });
+  };
+  const _f_show_flot_report_timing = function (data) {
+    let chart_form = `./report-flot-timing/`;
+    let w_width=800,w_heigght=800;
+    window.flot_report_timing_data=data;
+    let flot_report_timing = window.open(chart_form, "Буровичок - План работ", `location=no,status=no,width=${w_width},height=${w_heigght}`);
+    flot_report_timing.flot_report_timing_data=data;
+  };
+  $('.flot-list-container').on('click', '.btn-flot-show-report-timing', function () {
+    let unc_doc_flot = $(this).closest('.card-content').data('unc_doc_flot');
+    let doc_flot_index = $(this).closest('.card-content').data('doc_flot_index');
+    _f_load_and_show_flot_report_timing(unc_doc_flot,doc_flot_index);
+  });
+
+
+  
   /*
   * ---------- END load and show flot equipment list
   */
@@ -356,10 +390,10 @@ $(function () {
   };
   const _f_paint_flots_list = function (data) {
     $('.flot-list-container').empty();
-    data.respond.forEach(el => {
+    data.forEach((el,i) => {
       $('.flot-list-container').append(`
       <div class="card blue">
-        <div class="card-content white-text row" data-unc_doc_flot="${el.unc_doc_flot}">
+        <div class="card-content white-text row" data-unc_doc_flot="${el.unc_doc_flot}" data-doc_flot_index="${i}">
           <div class="img-flot col s3 m3 l3">
             <img src="${el.img_flot}" alt="logo">
           </div>
@@ -368,9 +402,10 @@ $(function () {
             <p>Буровая установка: ${el.model_flot}</p>
             <p>${el.title}</p>
             <p>Контролируемое оборудование: -</p>
-            <p>Текущий статус: -</p>
+            <p>Текущий статус: нет данных</p>
             <p>Плановый статус: - до -</p>
             <p>&nbsp</p>
+            <div class="btn white-text btn-flot-show-report-timing">План работ</div>
             <div class="btn white-text btn-flot-show-equipment">Показать оборудование</div>
           </div>
         </div>
@@ -380,7 +415,8 @@ $(function () {
   };
   $('a[href="./#opensection&s=s-flot&f=none"]').on('click', function () {
     _f_load_flots_list().then(function (data) {
-      _f_paint_flots_list(data);
+      doc_flot_list=data.respond;
+      _f_paint_flots_list(doc_flot_list);
     });
   });
 
@@ -503,7 +539,8 @@ $(function () {
   };
   const _f_show_chart = function (chart_filename) {
     let chart_form = `./chart/?${chart_filename}`;
-    window.open(chart_form, "Буровичок - График", `location=no,status=no`);
+    let w_width=1024,w_heigght=800;
+    window.open(chart_form, "Буровичок - График", `location=no,status=no,width=${w_width},height=${w_heigght}`);
   };
 
   $('.bt-create-sensor-chart').on('click', function () {
@@ -541,7 +578,7 @@ $(function () {
     $('.tender-list-container').empty();
     data.respond.forEach(el => {
       $('.tender-list-container').append(`
-      <div class="card blue">
+      <div class="card blue mlr-20">
         <div class="card-content white-text row" data-unc_doc_tender="${el.unc_doc_tender}">
           <div class="img-eq col s3 m3 l3">
             <img src="${el.img_eq}" alt="logo">
@@ -685,7 +722,7 @@ $(function () {
 
           $('.offer-list-container').append(`
 
-          <div class="card blue">
+          <div class="card blue mlr-20">
             <div class="card-content white-text row" data-unc_doc_offer="${el_td.unc_doc_tender}">
               <div class="img-eq col s3 m3 l3">
                 <img src="${el_td.img_eq}" alt="logo">
@@ -799,14 +836,14 @@ $(function () {
     $('.deal-list-container').empty();
     data.respond.forEach((el,i) => {
       $('.deal-list-container').append(`
-      <div class="card blue">
+      <div class="card blue mlr-20">
         <div class="card-content white-text row" data-unc_doc_deal="${el.unc_doc_deal} data-deal_index="${i}">
           <div class="img-eq col s4 m4 l4">
             <img src="${el.img_eq}" alt="logo">
             <p>&nbsp</p>
             <div class="btn white-text btn-deal-rating">Оценить работу</div>
           </div>
-          <div class="col s4 m4 l4">
+          <div class="col s4 m4 l4 bl">
             <span class="card-title">Договор № ${el.unc_doc_deal}</span>
             <p>Заказчик: ${el.dir_company_tender_name}</p>
             <p>Исполнитель: ${el.dir_company_deal_name}</p>
@@ -815,7 +852,7 @@ $(function () {
             <p>Установка: ${el.model_flot}</p>
             <p>&nbsp</p>
           </div>
-          <div class="col s4 m4 l4">
+          <div class="col s4 m4 l4 bl">
             <span class="card-title">Предложение№: ${el.unc_doc_offer} на Задание №: ${el.unc_doc_tender}</span>
             <p>Вид работ: ${el.name_tender_job}</p>
             <p>Заявленный срок выполнения: ${el.time_h_todo_job} час.</p>
@@ -926,7 +963,7 @@ $(function () {
     $('.myoffer-list-container').empty();
     data.respond.forEach((el,i) => {
       $('.myoffer-list-container').append(`
-      <div class="card blue">
+      <div class="card blue mlr-20">
         <div class="card-content white-text row data-unc_doc_offer="${el.unc_doc_offer} data-offer_index="${i}">
           <div class="img-eq col s3 m3 l3">
             <img src="${el.img_eq}" alt="logo">
@@ -941,7 +978,7 @@ $(function () {
             <p>Предложенный срок выполнения: ${el.time_h_offer} час.</p>
             <p>Статус: ${el.name_tender_status}</p>
             <p>&nbsp</p>
-            <div class="btn white-text btn-docs-myoffer-reject">Отозвать</div>
+            <div class="btn plug white-text btn-docs-myoffer-reject">Отозвать</div>
           </div>
         </div>
       </div>
@@ -980,12 +1017,12 @@ $(function () {
     $('.mydeal-list-container').empty();
     data.respond.forEach((el,i) => {
       $('.mydeal-list-container').append(`
-      <div class="card blue">
+      <div class="card blue mlr-20">
         <div class="card-content white-text row" data-unc_doc_deal="${el.unc_doc_deal} data-deal_index="${i}">
           <div class="img-eq col s4 m4 l4">
             <img src="${el.img_eq}" alt="logo">
           </div>
-          <div class="col s4 m4 l4">
+          <div class="col s4 m4 l4 bl">
             <span class="card-title">Договор № ${el.unc_doc_deal}</span>
             <p>Заказчик: ${el.dir_company_tender_name}</p>
             <p>Исполнитель: ${el.dir_company_deal_name}</p>
@@ -994,7 +1031,7 @@ $(function () {
             <p>Установка: ${el.model_flot}</p>
             <p>&nbsp</p>
           </div>
-          <div class="col s4 m4 l4">
+          <div class="col s4 m4 l4 bl">
             <span class="card-title">Предложение№: ${el.unc_doc_offer} на Задание №: ${el.unc_doc_tender}</span>
             <p>Вид работ: ${el.name_tender_job}</p>
             <p>Заявленный срок выполнения: ${el.time_h_todo_job} час.</p>
@@ -1024,32 +1061,239 @@ $(function () {
   ///######################################################## REPORT OTCHET
   ///########################################################
 
-  //* Заглушка *//
+  //* Заглушкa *//
 
-  $('a[href="./#opensection&s=s-report&f=f-report-byday"]').on('click', function () {
-    $._subjYELLOW('Данный функционал программного обеспечения не реализован в рамках MVP');
-  });
-
-  $('.btn-flot-serch-category').on('click', function () {
-    $._subjYELLOW('Данный функционал программного обеспечения не реализован в рамках MVP');
-  });
-
-  $('#bt_report_graph_paint').on('click', function () {
-    $._subjYELLOW('Данный функционал программного обеспечения не реализован в рамках MVP');
-  });
-
-  $('.s-messages').on('click','.btn', function () {
-    $._subjYELLOW('Данный функционал программного обеспечения не реализован в рамках MVP');
-  });
-
-  $('.f-docs-myoffer').on('click','.btn-docs-myoffer-reject', function () {
+  $('body').on('click','.plug', function () {
     $._subjYELLOW('Данный функционал программного обеспечения не реализован в рамках MVP');
   });
 
 
   ///########################################################
-  ///######################################################## REPORT OTCHET
+  ///######################################################## MESSAGES
   ///########################################################
+
+  const _f_load_users_list = function () {
+    return new Promise((resolve, reject) => {
+      backend_getJSON(nodejs, { app: app.basic, cmd: 'get-dir-user-list' }).then(function (data) { //* load users list
+        //todo: check data >> _check_res(data)
+        dir_user_list=data.respond;
+        resolve(data);
+      }).catch(function (err) {
+        reject(err);
+        console.log('err', err);
+      });
+    });
+  };
+  const _f_paint_users_list = function (data) {
+    $('#lst_out_message_users_list').empty();
+    data.respond.forEach((el,i) => {
+      $('#lst_out_message_users_list').append(`
+        <option data-unc_dir_user="${el.unc_dir_user}" value="${el.name_full} (${el.name_company})">${el.name_full} (${el.name_company})</option>
+      });
+      `);
+    });
+  };
+  $('a[href="./#opensection&s=s-messages&f=none"]').on('click', function () {
+    _f_load_users_list().then(function (data) {
+      _f_paint_users_list(data);
+    });
+  });
+
+  const _f_send_message = function (unc_dir_user_to,unc_dir_message_status,subj_msg,body_msg) {
+    return new Promise((resolve, reject) => {
+      backend_getJSON(nodejs, { app: app.basic, cmd: 'ins-new-message',unc_dir_user_to,unc_dir_message_status,subj_msg,body_msg }).then(function (data) { //* load users list
+        //todo: check data >> _check_res(data)
+        resolve(data);
+      }).catch(function (err) {
+        reject(err);
+        console.log('err', err);
+      });
+    });
+  };
+
+  const _f_get_unc_dir_user = function (mask){
+    let unc_dir_user=0;
+    dir_user_list.forEach(el => {
+      if (mask.toString().indexOf(el.name_full)>=0&&mask.toString().indexOf(el.name_company)>=0) {
+        unc_dir_user=el.unc_dir_user;
+      }
+    });
+    return unc_dir_user;
+  };
+
+  const _f_out_message_send_new=function () {
+    let unc_dir_user_to=_f_get_unc_dir_user($('#ed_out_message_users_list').val()),
+    unc_dir_message_status=$('#cb_out_message_status').val(),
+    subj_msg=$('#ed_out_message_new').val(),
+    body_msg=$('#ed_out_message_new').val();
+    _f_send_message(unc_dir_user_to,unc_dir_message_status,subj_msg,body_msg).then(function (data) {
+      console.log('data :>> ', data);
+    });
+  };
+  $('#btn_out_message_send_new').on('click', function () {
+    _f_out_message_send_new();
+  });
+
+  const _f_chat_message_send_new=function () {
+    let unc_dir_user_to=0,
+    unc_dir_message_status=$('#cb_chat_message_status').val(),
+    subj_msg=$('#ed_chat_message_new').val(),
+    body_msg=$('#ed_chat_message_new').val();
+    _f_send_message(unc_dir_user_to,unc_dir_message_status,subj_msg,body_msg).then(function (data) {
+      console.log('data :>> ', data);
+    });
+  };
+  $('#btn_chat_message_send_new').on('click', function () {
+    _f_chat_message_send_new();
+  });
+
+
+/* ----------------------- in_message_list begin ------------------------------ */
+
+  const _f_load_in_message_list = function () {
+    return new Promise((resolve, reject) => {
+      backend_getJSON(nodejs, { app: app.basic, cmd: 'get-doc-message-in' }).then(function (data) { //* load in_message list
+        //todo: check data >> _check_res(data)
+        resolve(data);
+      }).catch(function (err) {
+        reject(err);
+        console.log('err', err);
+      });
+    });
+  };
+  const _f_paint_in_message_list = function (data) {
+    $('#lst_in_message_list').empty();
+    data.forEach((el,i) => {
+      $('#lst_in_message_list').append(`
+      <li class="collection-item ${el.css_class===''?'':`${el.css_class} lighten-5`}">
+        <label for="msg${i}">${el.name_user_from} / ${mcss.data_time_normalize(el.dt_msg)} / 
+        <div class="event-msg ${el.css_class===''?'':`${el.css_class}-text`}">
+          ${el.name_status}
+        </div>
+        </label>
+        <div class="btn plug btn-small red btn-msg-chat-del" id=""><i class="small material-icons">delete</i></div>
+        <div class="btn plug white-text btn-small btn-msg-chat">Ответить</div>
+        <div id="msg${i}" class="">${el.subj_msg}</div>
+      </li>
+      `);
+    });
+  };
+  const _f_load_and_show_in_message = function (){
+    _f_load_in_message_list().then(function (data) {
+      if (data.respond.result==="empty") {
+        $._subjYELLOW('список сообщений пуст');
+      }else{
+        _f_paint_in_message_list(data.respond);
+      }
+    });
+  };
+
+  $('a[href="./#opensection&s=s-messages&f=f-messages-in"]').on('click', function () {
+    _f_load_and_show_in_message();
+  });
+/* ----------------------- in_message_list end ------------------------------ */
+  
+
+
+/* ----------------------- out_message_list begin ------------------------------ */
+
+  const _f_load_out_message_list = function () {
+    return new Promise((resolve, reject) => {
+      backend_getJSON(nodejs, { app: app.basic, cmd: 'get-doc-message-out' }).then(function (data) { //* load out_message list
+        //todo: check data >> _check_res(data)
+        resolve(data);
+      }).catch(function (err) {
+        reject(err);
+        console.log('err', err);
+      });
+    });
+  };
+  const _f_paint_out_message_list = function (data) {
+    $('#lst_out_message_list').empty();
+    data.forEach((el,i) => {
+      $('#lst_out_message_list').append(`
+      <li class="collection-item ${el.css_class===''?'':`${el.css_class} lighten-5`}">
+        <label for="msg${i}">${el.name_user_from} / ${mcss.data_time_normalize(el.dt_msg)} / 
+        <div class="event-msg ${el.css_class===''?'':`${el.css_class}-text`}">
+          ${el.name_status}
+        </div>
+        </label>
+        <div class="btn plug btn-small red btn-msg-chat-del" id=""><i class="small material-icons">delete</i></div>
+        <div class="btn plug white-text btn-small btn-msg-chat">Переслать</div>
+        <div id="msg${i}" class="">${el.subj_msg}</div>
+      </li>
+      `);
+    });
+  };
+  const _f_load_and_show_out_message = function (){
+    _f_load_out_message_list().then(function (data) {
+      if (data.respond.result==="empty") {
+        $._subjYELLOW('список сообщений пуст');
+      }else{
+        _f_paint_out_message_list(data.respond);
+      }
+    });
+  };
+
+  $('a[href="./#opensection&s=s-messages&f=f-messages-out"]').on('click', function () {
+    _f_load_and_show_out_message();
+  });
+
+  $('#btn_out_message_send_new').on('click', function () {
+    _f_load_and_show_out_message();
+  });
+/* ----------------------- out_message_list end ------------------------------ */
+  
+
+
+/* ----------------------- chat_message_list begin ------------------------------ */
+
+  const _f_load_chat_message_list = function () {
+    return new Promise((resolve, reject) => {
+      backend_getJSON(nodejs, { app: app.basic, cmd: 'get-doc-message-chat' }).then(function (data) { //* load chat_message list
+        //todo: check data >> _check_res(data)
+        resolve(data);
+      }).catch(function (err) {
+        reject(err);
+        console.log('err', err);
+      });
+    });
+  };
+  const _f_paint_chat_message_list = function (data) {
+    $('#lst_chat_message_list').empty();
+    data.forEach((el,i) => {
+      $('#lst_chat_message_list').append(`
+      <li class="collection-item ${el.css_class===''?'':`${el.css_class} lighten-5`}">
+        <label for="msg${i}">${el.name_user_from} / ${mcss.data_time_normalize(el.dt_msg)} / 
+        <div class="event-msg ${el.css_class===''?'':`${el.css_class}-text`}">
+          ${el.name_status}
+        </div>
+        </label>
+        <div class="btn plug white-text btn-small btn-msg-chat">Личное сообщение</div>
+        <div id="msg${i}" class="">${el.subj_msg}</div>
+      </li>
+      `);
+    });
+  };
+  const _f_load_and_show_chat_message = function (){
+    _f_load_chat_message_list().then(function (data) {
+      if (data.respond.result==="empty") {
+        $._subjYELLOW('список сообщений пуст');
+      }else{
+        _f_paint_chat_message_list(data.respond);
+      }
+    });
+  };
+
+  $('a[href="./#opensection&s=s-messages&f=f-messages-chat"]').on('click', function () {
+    _f_load_and_show_chat_message();
+  });
+
+  $('#btn_chat_message_send_new').on('click', function () {
+    _f_load_and_show_chat_message();
+  });
+/* ----------------------- chat_message_list end ------------------------------ */
+  
 
   ///########################################################
   ///######################################################## REPORT OTCHET
@@ -1098,6 +1342,33 @@ $(function () {
   $('#out_report_graph_body').on('click','.bt-report-graph-show-link', function () {
     $._subjBLUE(this.dataset.chart_link,30000);
   });
+
+  /* ----------------------- chart report rating begin ------------------------------ */
+
+  const _f_load_and_show_report_company_rating= function(cmd,company_info){
+    backend_getJSON(nodejs, { app: app.corporate, cmd}).then(function (data) { //* create company-rating chart
+      //todo: check data >> _check_res(data)
+      data.respond.company_info=company_info;
+      _f_show_report_company_rating(data.respond);
+    }).catch(function (err) {
+      console.log('err', err);
+    });
+  };
+  const _f_show_report_company_rating = function (data) {
+    let chart_form = `./report-company-rating/`;
+    let w_width=800,w_heigght=800;
+    window.report_company_rating_data=data;
+    let report_company_rating = window.open(chart_form, "Буровичок - Рейтинг", `location=no,status=no,width=${w_width},height=${w_heigght}`);
+    report_company_rating.report_company_rating_data=data;
+  };
+  $('.report-rating-container').on('click', '.btn-report-rating-eff', function () {
+    let cmd = $(this).data('cmd');
+    let company_info = $(this).children('a').html();
+    _f_load_and_show_report_company_rating(cmd,company_info);
+  });
+
+  /* ----------------------- chart report rating end ------------------------------ */
+
   /*
   * ---------- BEGIN create and show chart
   */

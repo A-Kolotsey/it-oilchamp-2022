@@ -133,6 +133,124 @@ var qjs = function (req, res, qstr) {
     });
   }
 
+  if (qstr.cmd === 'get-dir-message-status') {
+    qsql = `
+    select dims.unc unc_dir_message_status, dims.name_status, dims.css_class 
+    from eqip.t_dir_message_status dims  
+    `;
+    pg_query(qsql, []).then(function (data) {
+      return _f_response(global._respond_wrapper({ respond: data, querystate: true }));
+    }).catch((err) => {
+      return _f_response(global._respond_wrapper({ error: err }));
+    });
+  }
+
+  if (qstr.cmd === 'get-doc-message-in') {
+    qsql = `
+    SELECT 
+      dom.unc unc_doc_message, 
+      dom.unc_dir_user_from, 
+      dom.unc_dir_user_to, 
+      dom.unc_dir_message_status, 
+      dims.name_status,
+      dims.css_class,
+      dom.subj_msg, 
+      dom.body_msg, 
+      dom.dt_msg,
+      diut.name_full name_user_to,
+      diuf.name_full name_user_from
+    FROM eqip.t_doc_message dom
+    left join eqip.t_dir_user diut on dom.unc_dir_user_to =diut.unc  
+    left join eqip.t_dir_user diuf on dom.unc_dir_user_from =diuf.unc 
+    left join eqip.t_dir_message_status dims on dom.unc_dir_message_status =dims.unc    
+    where dom.unc_dir_user_to=${qstr.is_login_uid}
+    order by dom.dt_msg desc
+    `;
+    pg_query(qsql, []).then(function (data) {
+      return _f_response(global._respond_wrapper({ respond: data, querystate: true }));
+    }).catch((err) => {
+      return _f_response(global._respond_wrapper({ error: err }));
+    });
+  }
+  
+
+  if (qstr.cmd === 'get-doc-message-out') {
+    qsql = `
+    SELECT 
+      dom.unc unc_doc_message, 
+      dom.unc_dir_user_from, 
+      dom.unc_dir_user_to, 
+      dom.unc_dir_message_status, 
+      dims.name_status,
+      dims.css_class,
+      dom.subj_msg, 
+      dom.body_msg, 
+      dom.dt_msg,
+      diut.name_full name_user_to,
+      diuf.name_full name_user_from
+    FROM eqip.t_doc_message dom
+    left join eqip.t_dir_user diut on dom.unc_dir_user_to =diut.unc  
+    left join eqip.t_dir_user diuf on dom.unc_dir_user_from =diuf.unc 
+    left join eqip.t_dir_message_status dims on dom.unc_dir_message_status =dims.unc    
+    where dom.unc_dir_user_from=${qstr.is_login_uid}
+    order by dom.dt_msg desc
+    `;
+    pg_query(qsql, []).then(function (data) {
+      return _f_response(global._respond_wrapper({ respond: data, querystate: true }));
+    }).catch((err) => {
+      return _f_response(global._respond_wrapper({ error: err }));
+    });
+  }
+  
+
+  if (qstr.cmd === 'get-doc-message-chat') {
+    qsql = `
+    SELECT 
+      dom.unc unc_doc_message, 
+      dom.unc_dir_user_from, 
+      dom.unc_dir_message_status, 
+      dims.name_status,
+      dims.css_class,
+      dom.subj_msg, 
+      dom.body_msg, 
+      dom.dt_msg,
+      diuf.name_full name_user_from
+    FROM eqip.t_doc_message dom
+    left join eqip.t_dir_user diut on dom.unc_dir_user_to =diut.unc  
+    left join eqip.t_dir_user diuf on dom.unc_dir_user_from =diuf.unc 
+    left join eqip.t_dir_message_status dims on dom.unc_dir_message_status =dims.unc    
+    where dom.unc_dir_user_to=0
+    order by dom.dt_msg desc
+    `;
+    pg_query(qsql, []).then(function (data) {
+      return _f_response(global._respond_wrapper({ respond: data, querystate: true }));
+    }).catch((err) => {
+      return _f_response(global._respond_wrapper({ error: err }));
+    });
+  }
+  
+  if (qstr.cmd === 'ins-new-message') {
+    let unc_dir_user_to = to_sql.integer_abs(qstr.unc_dir_user_to);
+    if (unc_dir_user_to.length === 0) { return _f_response(global._respond_wrapper({ error: 'emptyparam', respond: { target: 'unc_dir_user_to' } })); }
+    let unc_dir_message_status = to_sql.integer_abs(qstr.unc_dir_message_status);
+    if (unc_dir_message_status.length === 0) { return _f_response(global._respond_wrapper({ error: 'emptyparam', respond: { target: 'unc_dir_message_status' } })); }
+    let subj_msg = to_sql.text(qstr.subj_msg);
+    if (subj_msg.length === 0) { return _f_response(global._respond_wrapper({ error: 'emptyparam', respond: { target: 'subj_msg' } })); }
+    let body_msg = to_sql.text(qstr.body_msg);
+    if (body_msg.length === 0) { body_msg = `''`; }
+    qsql = `
+    INSERT INTO eqip.t_doc_message
+    (unc_dir_user_from, unc_dir_user_to, unc_dir_message_status, subj_msg, body_msg)
+    VALUES(${qstr.is_login_uid}, ${unc_dir_user_to}, ${unc_dir_message_status}, ${subj_msg}, ${body_msg})
+    returning unc as unc_doc_message
+    `;
+    pg_query(qsql, []).then(function (data) {
+      return _f_response(global._respond_wrapper({ respond: data[0], querystate: true }));
+    }).catch((err) => {
+      return _f_response(global._respond_wrapper({ error: err }));
+    });
+  }
+
 
 
   /**     before query         ************************************************************************** */

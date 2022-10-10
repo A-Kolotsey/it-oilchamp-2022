@@ -14,15 +14,15 @@
   <link rel="stylesheet" href="../lib/materialize-icons-full/icon.css">
   <link rel="stylesheet" href="../lib/materialize-notifi/materialize-notifi.css">
   <link rel="stylesheet" href="../lib/chosen_v1.8.7/chosen.min.css">
-  <link rel="stylesheet" href="./materialize-reconf.css?ver=202209190848">
-  <link rel="stylesheet" href="./index.css?ver=202209190848">
+  <link rel="stylesheet" href="./materialize-reconf.css?ver=202210101307">
+  <link rel="stylesheet" href="./index.css?ver=202210101307">
 
 </head>
 
 <body>
 
   <header>
-    <nav>
+    <nav class="navbar-container">
       <div class="nav-wrapper blue lighten-1">
         <img src="./pictures/clipart.png" alt="logo">
         <div class="f-title brand-logo hide-on-med-and-down">
@@ -70,7 +70,6 @@
       <div class="f-flot-btn  blue lighten-1">
         <ul class="tabs tabs-transparent">
           <li class="tab"><a href="./#opensection&s=s-flot&f=f-flot-seach-by-flot">Поиск по флотам</a></li>
-          <li class="tab"><a href="./#opensection&s=s-flot&f=f-flot-seach-by-equipment">Поиск по оборудованию</a></li>
           <li class="tab bt-create-sensor-chart hide"><a>Построить график [<b>0</b>]</a></li>
         </ul>
       </div>
@@ -80,14 +79,13 @@
             <div class="col s12 m1 l1">
             </div>
             <div class="col s12 m10 l10">
-              <label for="ed_flot_input_flot_name" class="active">Наименование флота</label>
-              <input type="text" id="ed_flot_input_name" list="list_flot_input_flot_name" readonly="readonly"
-                value="Флот №...|">
+              <label for="ed_flot_input_flot_name" class="active">Поиск по ключевым словам</label>
+              <input type="text" id="ed_flot_input_name" list="list_flot_input_flot_name" value="">
               <datalist class="input-flot" id="list_flot_input_flot_name"></datalist>
             </div>
           </div>
           <div class="col s6 m1 l1">
-            <div class="btn btn-large btn-flot-serch-category" id="bt_flot_input_send"><i
+            <div class="btn plug btn-large btn-flot-serch-category" id="bt_flot_input_send"><i
                 class="small material-icons">search</i></div>
           </div>
         </div>
@@ -111,9 +109,8 @@
             </div>
           </div>
           <div class="col s12 m2 l2">
-            <div class="btn btn-large btn-flot-serch-category" id="bt_flot_rq_send"><i
+            <div class="btn plug btn-large btn-flot-serch-category" id="bt_flot_rq_send"><i
                 class="small material-icons">search</i></div>
-            <!-- <div class="btn btn-large" id="bt_flot_etaps_clean"><i class="small material-icons">loop</i></div> -->
           </div>
         </div>
 
@@ -159,7 +156,7 @@
         <!-- Предложения -->
         <div class="row offer-list-container">
 
-          
+
 
         </div>
       </div>
@@ -175,7 +172,7 @@
         <!-- Договоры -->
         <div class="row deal-list-container">
           <div class="col s12 m12 l12">
-            
+
           </div>
         </div>
       </div>
@@ -204,62 +201,19 @@
         <div class="row">
           <div class="">
             <div class="flex-inline-block">
-              <label for="ed_newchatcoment" class="">Новый коментарий</label>
-              <input type="text" name="ed_newchatcoment" id="ed_newchatcoment">
-              <select class="browser-default" id="cb_messages_chat_all">
+              <label for="ed_chat_message_new" class="">Новый коментарий</label>
+              <input type="text" name="ed_chat_message_new" id="ed_chat_message_new">
+              <select class="browser-default" id="cb_chat_message_status">
                 <option value="1" selected="selected">Переписка</option>
                 <option value="2">Срочное сообщение</option>
                 <option value="3">Информирование</option>
               </select>
-              <input type="submit" class="btn" id="btn_newcoment" value="Добавить">
+              <input type="submit" class="btn" id="btn_chat_message_send_new" value="Добавить">
             </div>
 
-            <ul class="collection coment-list">
-              <li class="collection-item " event="chat">
-                <label for="msg0">Пользователь / 2022-09-07 11:14:36 / <div class="event-msg">ПЕРЕПИСКА</div></label>
-                <div class="btn white-text btn-small btn-msg-chat">Личное сообщение</div>
-                <div id="msg0" class="">Текст сообщения...</div>
-              </li>
-              <li class="collection-item orange lighten-5" event="set-new-record">
-                <label for="msg1">Пользователь / 2022-09-07 11:14:36 / <div class="event-msg orange-text">СРОЧНОЕ
-                    СООБЩЕНИЕ</div>
-                </label>
-                <div class="btn white-text btn-small btn-msg-chat">Личное сообщение</div>
-                <div id="msg1" class="">Текст сообщения...</div>
-              </li>
-              <li class="collection-item blue lighten-5" event="chat">
-                <label for="msg0">Пользователь / 2022-09-07 11:14:36 / <div class="event-msg blue-text">ИНФОРМИРОВАНИЕ
-                  </div>
-                </label>
-                <div class="btn white-text btn-small btn-msg-chat">Личное сообщение</div>
-                <div id="msg0" class="">Текст сообщения...</div>
-              </li>
-              <li class="collection-item" event="set-new-record">
-                <label for="msg1">Пользователь / 2022-09-07 11:14:36 / <div class="event-msg">ПЕРЕПИСКА</div></label>
-                <div class="btn white-text btn-small btn-msg-chat">Личное сообщение</div>
-                <div id="msg1" class="">Текст сообщения...</div>
-              </li>
-              </li>
-              <li class="collection-item" event="set-new-record">
-                <label for="msg1">Пользователь / 2022-09-07 11:14:36 / <div class="event-msg">ПЕРЕПИСКА</div></label>
-                <div class="btn white-text btn-small btn-msg-chat">Личное сообщение</div>
-                <div id="msg1" class="">Текст сообщения...</div>
-              </li>
-              </li>
-              <li class="collection-item blue lighten-5" event="chat">
-                <label for="msg0">Пользователь / 2022-09-07 11:14:36 / <div class="event-msg blue-text">ИНФОРМИРОВАНИЕ
-                  </div>
-                </label>
-                <div class="btn white-text btn-small btn-msg-chat">Личное сообщение</div>
-                <div id="msg0" class="">Текст сообщения...</div>
-              </li>
-              </li>
-              <li class="collection-item" event="set-new-record">
-                <label for="msg1">Пользователь / 2022-09-07 11:14:36 / <div class="event-msg">ПЕРЕПИСКА</div></label>
-                <div class="btn white-text btn-small btn-msg-chat">Личное сообщение</div>
-                <div id="msg1" class="">Текст сообщения...</div>
-              </li>
+            <ul class="collection coment-list" id="lst_chat_message_list">
             </ul>
+
           </div>
         </div>
       </div>
@@ -268,59 +222,10 @@
         <!--Входящие-->
         <div class="row">
           <div class="">
-            <ul class="collection coment-list">
-              <li class="collection-item " event="chat">
-                <label for="msg0">Пользователь / 2022-09-07 11:14:36 / <div class="event-msg">ПЕРЕПИСКА</div></label>
-                <div class="btn btn-small red btn-msg-chat-del" id=""><i class="small material-icons">delete</i></div>
-                <div class="btn white-text btn-small btn-msg-chat">Ответить</div>
-                <div id="msg0" class="">Текст сообщения...</div>
-              </li>
-              <li class="collection-item orange lighten-5" event="set-new-record">
-                <label for="msg1">Пользователь / 2022-09-07 11:14:36 / <div class="event-msg orange-text">СРОЧНОЕ
-                    СООБЩЕНИЕ</div>
-                </label>
-                <div class="btn btn-small red btn-msg-chat-del" id=""><i class="small material-icons">delete</i></div>
-                <div class="btn white-text btn-small btn-msg-chat">Ответить</div>
-                <div id="msg1" class="">Текст сообщения...</div>
-              </li>
-              <li class="collection-item blue lighten-5" event="chat">
-                <label for="msg0">Пользователь / 2022-09-07 11:14:36 / <div class="event-msg blue-text">ИНФОРМИРОВАНИЕ
-                  </div>
-                </label>
-                <div class="btn btn-small red btn-msg-chat-del" id=""><i class="small material-icons">delete</i></div>
-                <div class="btn white-text btn-small btn-msg-chat">Ответить</div>
-                <div id="msg0" class="">Текст сообщения...</div>
-              </li>
-              <li class="collection-item" event="set-new-record">
-                <label for="msg1">Пользователь / 2022-09-07 11:14:36 / <div class="event-msg">ПЕРЕПИСКА</div></label>
-                <div class="btn btn-small red btn-msg-chat-del" id=""><i class="small material-icons">delete</i></div>
-                <div class="btn white-text btn-small btn-msg-chat">Ответить</div>
-                <div id="msg1" class="">Текст сообщения...</div>
-              </li>
-              </li>
-              <li class="collection-item" event="set-new-record">
-                <label for="msg1">Пользователь / 2022-09-07 11:14:36 / <div class="event-msg">ПЕРЕПИСКА</div></label>
-                <div class="btn btn-small red btn-msg-chat-del" id=""><i class="small material-icons">delete</i></div>
-                <div class="btn white-text btn-small btn-msg-chat">Ответить</div>
-                <div id="msg1" class="">Текст сообщения...</div>
-              </li>
-              </li>
-              <li class="collection-item blue lighten-5" event="chat">
-                <label for="msg0">Пользователь / 2022-09-07 11:14:36 / <div class="event-msg blue-text">ИНФОРМИРОВАНИЕ
-                  </div>
-                </label>
-                <div class="btn btn-small red btn-msg-chat-del" id=""><i class="small material-icons">delete</i></div>
-                <div class="btn white-text btn-small btn-msg-chat">Ответить</div>
-                <div id="msg0" class="">Текст сообщения...</div>
-              </li>
-              </li>
-              <li class="collection-item" event="set-new-record">
-                <label for="msg1">Пользователь / 2022-09-07 11:14:36 / <div class="event-msg">ПЕРЕПИСКА</div></label>
-                <div class="btn btn-small red btn-msg-chat-del" id=""><i class="small material-icons">delete</i></div>
-                <div class="btn white-text btn-small btn-msg-chat">Ответить</div>
-                <div id="msg1" class="">Текст сообщения...</div>
-              </li>
+
+            <ul class="collection coment-list" id="lst_in_message_list">
             </ul>
+
           </div>
         </div>
       </div>
@@ -329,75 +234,28 @@
         <!--Исходящие-->
         <div class="row">
           <div class="">
-            <div class="flex-inline-block">
-              <label for="ed_newchatcoment" class="">Сообщение</label>
-              <input type="text" name="ed_newchatcoment" id="ed_newchatcoment">
-              <label for="ed_newchatcoment" class="">Кому отправить</label>
-              <select class="browser-default" id="cb_messages_chat_all">
+
+            <div class="flex-inline-block col s12 m12 l12">
+              <label for="ed_out_message_users_list" class="">Кому отправить</label>
+              <input type="text" name="ed_out_message_users_list" id="ed_out_message_users_list"
+                list="lst_out_message_users_list">
+              <datalist id="lst_out_message_users_list"></datalist>
+              <select class="browser-default" id="cb_out_message_status">
                 <option value="1" selected="selected">Переписка</option>
                 <option value="2">Срочное сообщение</option>
                 <option value="3">Информирование</option>
               </select>
-              <select class="browser-default" id="cb_messages_chat_all">
-                <option value="1" selected="selected">Переписка</option>
-                <option value="2">Срочное сообщение</option>
-                <option value="3">Информирование</option>
-              </select>
-              <input type="submit" class="btn" id="btn_newcoment" value="Выбрать">
             </div>
-            <ul class="collection coment-list">
-              <li class="collection-item " event="chat">
-                <label for="msg0">Пользователь / 2022-09-07 11:14:36 / <div class="event-msg">ПЕРЕПИСКА</div></label>
-                <div class="btn btn-small red btn-msg-chat-del" id=""><i class="small material-icons">delete</i></div>
-                <div class="btn white-text btn-small btn-msg-chat">Переслать</div>
-                <div id="msg0" class="">Текст сообщения...</div>
-              </li>
-              <li class="collection-item orange lighten-5" event="set-new-record">
-                <label for="msg1">Пользователь / 2022-09-07 11:14:36 / <div class="event-msg orange-text">СРОЧНОЕ
-                    СООБЩЕНИЕ</div>
-                </label>
-                <div class="btn btn-small red btn-msg-chat-del" id=""><i class="small material-icons">delete</i></div>
-                <div class="btn white-text btn-small btn-msg-chat">Переслать</div>
-                <div id="msg1" class="">Текст сообщения...</div>
-              </li>
-              <li class="collection-item blue lighten-5" event="chat">
-                <label for="msg0">Пользователь / 2022-09-07 11:14:36 / <div class="event-msg blue-text">ИНФОРМИРОВАНИЕ
-                  </div>
-                </label>
-                <div class="btn btn-small red btn-msg-chat-del" id=""><i class="small material-icons">delete</i></div>
-                <div class="btn white-text btn-small btn-msg-chat">Переслать</div>
-                <div id="msg0" class="">Текст сообщения...</div>
-              </li>
-              <li class="collection-item" event="set-new-record">
-                <label for="msg1">Пользователь / 2022-09-07 11:14:36 / <div class="event-msg">ПЕРЕПИСКА</div></label>
-                <div class="btn btn-small red btn-msg-chat-del" id=""><i class="small material-icons">delete</i></div>
-                <div class="btn white-text btn-small btn-msg-chat">Переслать</div>
-                <div id="msg1" class="">Текст сообщения...</div>
-              </li>
-              </li>
-              <li class="collection-item" event="set-new-record">
-                <label for="msg1">Пользователь / 2022-09-07 11:14:36 / <div class="event-msg">ПЕРЕПИСКА</div></label>
-                <div class="btn btn-small red btn-msg-chat-del" id=""><i class="small material-icons">delete</i></div>
-                <div class="btn white-text btn-small btn-msg-chat">Переслать</div>
-                <div id="msg1" class="">Текст сообщения...</div>
-              </li>
-              </li>
-              <li class="collection-item blue lighten-5" event="chat">
-                <label for="msg0">Пользователь / 2022-09-07 11:14:36 / <div class="event-msg blue-text">ИНФОРМИРОВАНИЕ
-                  </div>
-                </label>
-                <div class="btn btn-small red btn-msg-chat-del" id=""><i class="small material-icons">delete</i></div>
-                <div class="btn white-text btn-small btn-msg-chat">Переслать</div>
-                <div id="msg0" class="">Текст сообщения...</div>
-              </li>
-              </li>
-              <li class="collection-item" event="set-new-record">
-                <label for="msg1">Пользователь / 2022-09-07 11:14:36 / <div class="event-msg">ПЕРЕПИСКА</div></label>
-                <div class="btn btn-small red btn-msg-chat-del" id=""><i class="small material-icons">delete</i></div>
-                <div class="btn white-text btn-small btn-msg-chat">Переслать</div>
-                <div id="msg1" class="">Текст сообщения...</div>
-              </li>
+
+            <div class="flex-inline-block col s12 m12 l12">
+              <label for="ed_out_message_new" class="">Сообщение</label>
+              <input type="text" name="ed_out_message_new" id="ed_out_message_new">
+              <input type="submit" class="btn" id="btn_out_message_send_new" value="Отправить">
+            </div>
+
+            <ul class="collection coment-list" id="lst_out_message_list">
             </ul>
+
           </div>
         </div>
       </div>
@@ -408,30 +266,29 @@
     <div class="section s-report container ">
       <div class="f-report-btn blue lighten-1">
         <ul class="tabs tabs-transparent">
-          <li class="tab" title="">
-            <a href="./#opensection&s=s-report&f=f-report-graph">Графики</a>
-          </li>
-          <li class="tab"><a href="./#opensection&s=s-report&f=f-report-byday">Отчет по заданиям</a></li>
+          <li class="tab"><a href="./#opensection&s=s-report&f=f-report-graph">Графики</a></li>
+          <li class="tab"><a href="./#opensection&s=s-report&f=f-report-rating">Рейтинг исполнителей</a></li>
         </ul>
       </div>
 
       <div class="form f-report-graph">
+        <!-- Графики -->
         <div class="row">
           <div class="col s12 m5 l5">
-            <label for="cb_report_graph_skv">Наименование датчика</label>
-            <select class="browser-default" id="cb_report_graph_skv">
+            <label for="cb_report_graph_dty">Год</label>
+            <select class="browser-default" id="cb_report_graph_dty">
               <option value="0" disabled="disabled" selected="selected">-- ВЫБРАТЬ --</option>
             </select>
           </div>
           <div class="col s12 m5 l5">
-            <label for="cb_report_graph_type">Наименование оборудования</label>
-            <select class="browser-default" id="cb_report_graph_type">
+            <label for="cb_report_graph_dtm">Месяц</label>
+            <select class="browser-default" id="cb_report_graph_dtm">
               <option value="0" disabled="disabled" selected="selected">-- ВЫБРАТЬ --</option>
             </select>
           </div>
           <label>&nbsp</label>
           <div class="col s12 m2 l2">
-            <div class="btn" id="bt_report_graph_paint">Отобразить</div>
+            <div class="btn" id="bt_report_get_chart_list">Отобразить</div>
           </div>
         </div>
         <div class="row">
@@ -458,10 +315,30 @@
         </div>
       </div>
 
-      <div class="form f-report-byday">
-        <div class="row">
-        </div>
-        <div class="row" id="out_report_byday">
+
+      <div class="form f-report-rating">
+        <!-- Рейтинг исполнителей -->
+        <div class="report-rating-container">
+          <div class="row">
+
+
+            <div class="f-report-btn blue">
+              <ul class="tabs tabs-transparent">
+                <li class="tab btn-report-rating-eff" data-cmd="get-report-company-rating-eff"><a>"Эффективность исполнителей"</a></li>
+                <li class="tab plug btn-report-rating-srok" data-cmd="get-report-company-rating-srok"><a>"Соблюдение сроков выполнения"</a></li>
+                <li class="tab plug btn-report-rating-rent" data-cmd="get-report-company-rating-rent"><a>"Рентабельность ткп"</a></li>
+              </ul>
+            </div>
+
+
+            <div class="col s12 m12 l12 report-rating-eff-container">
+              <div class="card-container">
+                <div class="col s12 m12 l3"></div>
+                <div class="col s12 m12 l3"></div>
+                <div class="col s12 m12 l3"></div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -514,10 +391,10 @@
   <script src="./materialize-initialization.js"></script>
   <script src="../lib/chart.js-2.7.3/Chart.min.js"></script>
 
-  <script src="./index-ui.js?ver=202209190848"></script>
-  <script src="./index.js?ver=202209190848"></script>
-  <script src="./login-form.js?ver=202209190848"></script>
-  <script src="./actions.js?ver=202209190848"></script>
+  <script src="./index-ui.js?ver=202210101307"></script>
+  <script src="./index.js?ver=202210101307"></script>
+  <script src="./login-form.js?ver=202210101307"></script>
+  <script src="./actions.js?ver=202210101307"></script>
   <script src="./singlepage.js"></script>
 </body>
 

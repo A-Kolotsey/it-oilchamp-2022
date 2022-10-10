@@ -18,17 +18,6 @@ $(function () {
     $(this).addClass('active');
   });
 
-  // $('#daily_raport_br_params').
-
-  $._f_report_graph_set_height = function () {
-    let graph_offset = $('#f_report_graph_result').offset().top;
-    let footer_height = $('.page-footer').outerHeight();
-    $('#f_report_graph_result').css('height', `calc(100vh - ${graph_offset+footer_height+50}px)`);
-  };
-  $(window).resize(function () { 
-    $._f_report_graph_set_height();
-  });
-
   $('img[alt="logo"]').on('click', function () {
     window.location = "../main-raport/";
   });
